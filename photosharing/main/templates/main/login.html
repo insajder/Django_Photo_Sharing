@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="registration-form">
+
+  <form method="POST" class="post-form" action="">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="exampleInputUser1" class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" id="exampleInputUser1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <input name="login" type="submit" value="Login" class="btn btn-success">
+    </br>
+    </br>
+    <input name="register" type="submit" value="Register" class="btn btn-success">
+  </form>
+  <div>
+    {% for message in messages %}
+    <h3>{{ message }}</h3>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

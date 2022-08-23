@@ -1,0 +1,17 @@
+{% extends 'main/home.html' %}
+
+{% block page %}
+<form method="post" enctype="multipart/form-data" class="post-form" action="">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Save" class="btn btn-success">
+
+</form>
+
+{% for message in messages %}
+    <h3>{{ message }}</h3>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="registration-form">
+  <form method="POST" enctype="multipart/form-data" class="post-form" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <label>Profile image:</label>
+    <div class="preview">
+       <img class="rounded-circle" id="file-ip-1-preview" style="width:100px;">
+     </div>
+    </br>
+     <input name="photo_path" type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+    </br></br>
+
+    <input type="submit" value="Register" class="btn btn-success">
+
+      {% if messages %}
+      {% for message in messages %}
+        <h2>{{ message }}</h2>
+      {% endfor %}
+    {% endif %}
+
+  </form>
+
+</div>
+{% endblock %}

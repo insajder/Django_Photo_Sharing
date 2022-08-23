@@ -1,0 +1,73 @@
+{% extends 'main/home.html' %}
+
+{% block page %}
+<form method="post" enctype="multipart/form-data" class="post-form" action="">
+    {% csrf_token %}
+
+<!--    <input type="submit" value="Messages" class="btn btn-success" name="messages">-->
+
+    <ul class="list-group">
+      <li class="list-group-item">First name: {{ user.first_name }}</li>
+      <li class="list-group-item">Last Name: {{ user.last_name }}</li>
+      <li class="list-group-item">Username: {{ user.username }}</li>
+        {% if user.description %}
+      <li class="list-group-item">Description: {{ user.description }}</li>
+        {% endif %}
+        {% if user.profile_photo_path %}
+        <li class="list-group-item">Profile photo:
+            <img src="{{ user.profile_photo_path.url }}" class="rounded-circle" id="file-ip-1-preview" style="width:100px;">
+<!--            <img class="img-thumbnail w-50 h-50" src="{{ user.profile_photo_path.url }}">-->
+        </li>
+        {% endif %}
+
+    </ul>
+    <br>
+    {% if current %}
+    <div class="input-group">
+    <div>
+        <input type="submit" value="Edit" class="btn btn-success me-3" name="edit">
+    </div>
+    <div>
+        <input type="submit" value="Add photo" class="btn btn-success me-3" name="add_photo">
+    </div>
+    <div class="dropdown">
+          <a class="btn btn-success dropdown-toggle me-3" data-bs-toggle="dropdown">Followers
+          <span class="badge">{{ user_followers|length }}</span>
+          </a>
+      <ul class="dropdown-menu">
+          {% for i in user_followers %}
+            <li><a class="dropdown-item">{{ i.username }}</a></li>
+          {% endfor %}
+      </ul>
+    </div>
+        <div class="dropdown">
+          <a class="btn btn-success dropdown-toggle me-3" data-bs-toggle="dropdown">Following
+          <span class="badge">{{ user_following|length }}</span>
+          </a>
+      <ul class="dropdown-menu">
+          {% for i in user_following %}
+            <li><a class="dropdown-item">{{ i.username }}</a></li>
+          {% endfor %}
+      </ul>
+    </div>
+    </div>
+    {% endif %}
+    <br><br>
+    {% for p in photos reversed %}
+    <div class="card" style="width: 22rem;">
+      <img src="{{ p.photo_path.url }}" class="card-img-top" style="height: 200px;">
+      <div class="card-body">
+          {% if p.location %}
+          <p class="card-text">Location: {{ p.location }}</p>
+          {% endif %}
+          <p class="card-text">{{ p.like }} likes</p>
+          {% if p.description %}
+          <p class="card-text">Description: {{ p.description }}</p>
+          {% endif %}
+      </div>
+    </div>
+    </br>
+    {% endfor %}
+
+</form>
+{% endblock %}

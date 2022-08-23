@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+ <form method="post" enctype="multipart/form-data" class="post-form" action="">
+    {% csrf_token %}
+     <div class="input-group">
+          <a class="nav-link" href="/home/">Home</a>
+        <a class="nav-link" href="/profile/">Profil</a>
+         <a class="nav-link" href="/messages/0">Messages</a>
+
+     </div>
+
+    {% block page %}
+    {% endblock %}
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'main/home.html' %}
+
+{% block page %}
+<form method="post" class="post-form" action="">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+                {% for user in lstUsers %}
+                {% if select == user.id_user %}
+                    <a href="http://127.0.0.1:8000/messages/{{ user.id_user }}" class="list-group-item list-group-item-action bg-primary text-light">{{ user.username }}</a>
+                {% else %}
+                    <a href="http://127.0.0.1:8000/messages/{{ user.id_user }}" class="list-group-item list-group-item-action">{{ user.username }}</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-9">
+
+             {% block content_messages %}
+             {% endblock %}
+
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
